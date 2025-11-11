@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Steve Nooshinfar - Creative Visual Solutions</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(-45deg, #0f172a, #1e293b, #0f172a, #334155);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+            color: #e2e8f0; /* slate-200 */
+        }
+
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .text-gradient {
+            background: linear-gradient(to right, #38bdf8, #a78bfa, #f472b6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .service-card, .plan-builder-card {
+            background: rgba(30, 41, 59, 0.7); /* bg-slate-800 with 70% opacity */
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(51, 65, 85, 0.5); /* border-slate-700 with 50% opacity */
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .service-card:hover {
+            transform: translateY(-8px);
+            border-color: #38bdf8;
+            box-shadow: 0 10px 25px -5px rgba(56, 189, 248, 0.1);
+        }
+        
+        .quote-card {
+            background: rgba(15, 23, 42, 0.8); /* bg-slate-900 with 80% opacity */
+            backdrop-filter: blur(12px);
+            border: 2px solid #38bdf8;
+            box-shadow: 0 10px 40px -10px rgba(56, 189, 248, 0.3);
+            /* This makes the card "stick" to the top as you scroll */
+            position: sticky;
+            top: 100px; 
+        }
+
+        /* Style the sliders */
+        input[type="range"] {
+            -webkit-appearance: none;
+            width: 100%;
+            height: 8px;
+            background: #334155; /* slate-700 */
+            border-radius: 5px;
+            outline: none;
+            transition: opacity .2s;
+        }
+        
+        /* Slider thumb */
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 24px;
+            height: 24px;
+            background: #38bdf8; /* sky-500 */
+            cursor: pointer;
+            border-radius: 50%;
+            border: 4px solid #0f172a; /* slate-900 */
+        }
+        
+        input[type="range"]::-moz-range-thumb {
+            width: 24px;
+            height: 24px;
+            background: #38bdf8;
+            cursor: pointer;
+            border-radius: 50%;
+            border: 4px solid #0f172a;
+        }
+        
+        /* Checkbox style */
+        input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            accent-color: #38bdf8;
+        }
+        
+        /* Disabled slider style */
+        input[type="range"]:disabled {
+            opacity: 0.5;
+        }
+         input[type="range"]:disabled::-webkit-slider-thumb {
+            background: #64748b; /* slate-500 */
+        }
+         input[type="range"]:disabled::-moz-range-thumb {
+            background: #64748b;
+        }
+
+
+        .fade-in {
+            opacity: 0;
+            animation: fadeIn 0.8s ease-out forwards;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .delay-100 { animation-delay: 100ms; }
+        .delay-200 { animation-delay: 200ms; }
+        .delay-300 { animation-delay: 300ms; }
+        .delay-400 { animation-delay: 400ms; }
+        .delay-500 { animation-delay: 500ms; }
+    </style>
+</head>
+<body class="text-slate-200 overflow-x-hidden">
+
+    <!-- Header -->
+    <header class="fixed top-0 left-0 right-0 z-50 bg-slate-900/50 backdrop-blur-md border-b border-slate-800">
+        <nav class="container mx-auto max-w-7xl px-6 py-4 flex justify-between items-center">
+            <a href="#" class="text-2xl font-bold text-gradient">Steve Nooshinfar</a>
+            <div class="hidden md:flex gap-6 items-center">
+                <a href="#about" class="text-slate-300 hover:text-white transition-colors">About Me</a>
+                <a href="#builder" class="text-slate-300 hover:text-white transition-colors">Plan Builder</a>
+                <a href="#services" class="text-slate-300 hover:text-white transition-colors">All Services</a>
+                <a href="#work" class="text-slate-300 hover:text-white transition-colors">My Work</a>
+            </div>
+            <a href="https://calendar.app.google/2RxDHToRhp6eh9tQ8" target="_blank" class="bg-blue-600 text-white px-5 py-2 rounded-lg font-semibold hover:bg-blue-500 transition-colors shadow-lg shadow-blue-500/20">
+                Book a Free Call
+            </a>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main class="pt-24">
+
+        <!-- Hero Section -->
+        <section class="min-h-[80vh] container mx-auto max-w-7xl px-6 py-20 flex flex-col justify-center items-center text-center">
+            <div class="fade-in">
+                <h1 class="text-4xl md:text-6xl lg:text-7xl font-extrabold leading-tight mb-6">
+                    Steve Nooshinfar
+                </h1>
+                <h2 class="text-4xl md:text-6xl lg:text-7xl font-extrabold leading-tight mb-8">
+                    <span class="text-gradient">Creative Visual Solutions</span>
+                </h2>
+                <p class="text-lg md:text-xl text-slate-300 max-w-3xl mx-auto mb-10">
+                    From viral Reels and stunning animations to professional event coverage, I help personal brands and companies bring their vision to life.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                    <a href="#builder" class="bg-gradient-to-r from-blue-500 to-cyan-400 text-white px-8 py-4 rounded-lg font-bold text-lg shadow-xl hover:opacity-90 transition-all">
+                        Build Your Custom Plan
+                    </a>
+                    <a href="#about" class="bg-slate-700/50 border border-slate-600 text-white px-8 py-4 rounded-lg font-bold text-lg hover:bg-slate-600/50 transition-colors">
+                        Learn More About Me
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Me Section (NEW) -->
+        <section id="about" class="py-24">
+            <div class="container mx-auto max-w-4xl px-6 text-center">
+                <div class="service-card rounded-2xl p-10 md:p-16 fade-in">
+                    <h2 class="text-4xl md:text-5xl font-extrabold text-white mb-6">From Lens to Leadership: My Journey</h2>
+                    <p class="text-lg text-slate-300 max-w-3xl mx-auto mb-8">
+                        I didn't just learn this industry; I grew up in it. My journey started behind the scenes as a camera assistant, grew into a cameraman, and then dived deep into editing, motion graphics, and complex 3D visual production. Today, I direct and produce.
+                    </p>
+                    <p class="text-xl font-semibold text-gradient max-w-3xl mx-auto">
+                        This means I've faced every challenge you're facing. I know the pain of getting a vision *just right*. Let me use my 10+ years of experience to help you.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Custom Plan Builder -->
+        <section id="builder" class="py-24 bg-slate-900/70">
+            <div class="container mx-auto max-w-7xl px-6">
+                <div class="text-center mb-16 max-w-3xl mx-auto">
+                    <h2 class="text-4xl md:text-5xl font-extrabold mb-4 fade-in">Build Your Custom Monthly Plan</h2>
+                    <p class="text-lg text-slate-300 fade-in delay-100">
+                        Use the sliders to create your perfect package. The more you add, the more you save!
+                        <br><span class="text-sm text-slate-400">(Prices are for editing-only, based on you providing the raw video files.)</span>
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                    
+                    <!-- Left Column: Sliders -->
+                    <div class="lg:col-span-2 space-y-8">
+                        
+                        <!-- Reels Calculator -->
+                        <div class="plan-builder-card rounded-xl p-8 fade-in delay-100">
+                            <div class="flex justify-between items-center mb-4">
+                                <label for="reels-slider" class="text-2xl font-bold text-white">Reels / TikToks</label>
+                                <div class="text-right">
+                                    <span id="reels-count" class="text-3xl font-bold text-gradient">0</span>
+                                    <span class="text-sm text-slate-400">per month</span>
+                                </div>
+                            </div>
+                            <input type="range" id="reels-slider" min="0" max="30" value="0" step="1">
+                            <div class="text-right text-lg text-blue-400 font-semibold mt-3" id="reels-price-per">
+                                <!-- JS will insert price per reel here -->
+                            </div>
+                        </div>
+
+                        <!-- Posts Calculator -->
+                        <div class="plan-builder-card rounded-xl p-8 fade-in delay-200">
+                            <div class="flex justify-between items-center mb-4">
+                                <label for="posts-slider" class="text-2xl font-bold text-white">Static / Carousel Posts</label>
+                                <div class="text-right">
+                                    <span id="posts-count" class="text-3xl font-bold text-gradient">0</span>
+                                    <span class="text-sm text-slate-400">per month</span>
+                                </div>
+                            </div>
+                            <input type="range" id="posts-slider" min="0" max="30" value="0" step="1">
+                            <div class="text-right text-lg text-blue-400 font-semibold mt-3" id="posts-price-per">
+                                <!-- JS will insert price per post here -->
+                            </div>
+                        </div>
+
+                        <!-- Stories Calculator -->
+                        <div class="plan-builder-card rounded-xl p-8 fade-in delay-300">
+                            <label class="text-2xl font-bold text-white mb-4 block">Stories</label>
+                            
+                            <!-- Story Package Checkbox -->
+                            <div class="flex items-center gap-4 p-4 bg-slate-700/50 rounded-lg border border-slate-600">
+                                <input type="checkbox" id="story-package" class="flex-shrink-0">
+                                <label for="story-package" class="text-lg text-slate-100">
+                                    Add Full 20-Day Story Package
+                                    <span class="block text-sm text-blue-300 font-semibold">Best Value: 250 AED / Month</span>
+                                </label>
+                            </div>
+                            
+                            <p class="text-center text-slate-400 my-4">OR</p>
+
+                            <!-- Individual Stories Slider -->
+                            <div class="flex justify-between items-center mb-4">
+                                <label for="stories-slider" class="text-lg font-semibold text-white">Individual Stories</label>
+                                <div class="text-right">
+                                    <span id="stories-count" class="text-3xl font-bold text-gradient">0</span>
+                                    <span class="text-sm text-slate-400">@ 15 AED each</span>
+                                </div>
+                            </div>
+                            <input type="range" id="stories-slider" min="0" max="19" value="0" step="1">
+                        </div>
+                        
+                        <!-- Videographer Options -->
+                        <div class="plan-builder-card rounded-xl p-8 fade-in delay-400">
+                            <label class="text-2xl font-bold text-white mb-4 block">Add Filming Services?</label>
+                            <p class="text-sm text-slate-400 mb-6">
+                                Need on-site filming? Select your needs. We'll discuss the final price, as this depends on location, lights, and time.
+                            </p>
+                            <div class="space-y-4">
+                                <div class="flex items-center gap-4 p-4 bg-slate-700/50 rounded-lg border border-slate-600">
+                                    <input type="checkbox" id="video-iphone-check" class="flex-shrink-0">
+                                    <label for="video-iphone-check" class="text-lg text-slate-100">
+                                        iPhone Videography
+                                        <span class="block text-sm text-blue-300 font-semibold">Approx. 500 AED / 5 Hours</span>
+                                    </label>
+                                </div>
+                                <div class="flex items-center gap-4 p-4 bg-slate-700/50 rounded-lg border border-slate-600">
+                                    <input type="checkbox" id="video-camera-check" class="flex-shrink-0">
+                                    <label for="video-camera-check" class="text-lg text-slate-100">
+                                        Pro Camera Videography
+                                        <span class="block text-sm text-blue-300 font-semibold">Starts at 850 AED / Day</span>
+                                    </label>
+                                </div>
+                                <div class="flex items-center gap-4 p-4 bg-slate-700/50 rounded-lg border border-slate-600">
+                                    <input type="checkbox" id="video-mic-check" class="flex-shrink-0">
+                                    <label for="video-mic-check" class="text-lg text-slate-100">
+                                        Interview Mic Kit
+                                        <span class="block text-sm text-blue-300 font-semibold">Adds 150 AED / Day</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    
+                    <!-- Right Column: Quote Summary -->
+                    <div class="lg:col-span-1">
+                        <div class="quote-card rounded-2xl p-6 lg:p-8 text-center">
+                            <h3 class="text-3xl font-extrabold text-white mb-6">Your Custom Quote</h3>
+                            
+                            <!-- Editing Totals -->
+                            <div class="space-y-4 text-lg text-slate-300 text-left mb-6">
+                                <div class="flex justify-between items-center">
+                                    <span>Reels Total:</span>
+                                    <span id="reels-total" class="font-bold text-white">0 AED</span>
+                                </div>
+                                <div class="flex justify-between items-center">
+                                    <span>Posts Total:</span>
+                                    <span id="posts-total" class="font-bold text-white">0 AED</span>
+                                </div>
+                                <div class="flex justify-between items-center">
+                                    <span>Stories Total:</span>
+                                    <span id="stories-total" class="font-bold text-white">0 AED</span>
+                                </div>
+                            </div>
+
+                            <!-- Videography Summary -->
+                            <div id="video-summary" class="hidden space-y-3 text-left mb-6">
+                                <p class="text-lg text-yellow-400 font-semibold">Filming Services (to discuss):</p>
+                                <div id="video-iphone-note" class="hidden flex items-center gap-2 text-slate-300">
+                                    <i class="fas fa-check-circle text-green-500"></i>
+                                    <span>iPhone Videography</span>
+                                </div>
+                                <div id="video-camera-note" class="hidden flex items-center gap-2 text-slate-300">
+                                    <i class="fas fa-check-circle text-green-500"></i>
+                                    <span>Pro Camera Videography</span>
+                                </div>
+                                <div id="video-mic-note" class="hidden flex items-center gap-2 text-slate-300">
+                                    <i class="fas fa-check-circle text-green-500"></i>
+                                    <span>Interview Mic Kit</span>
+                                </div>
+                            </div>
+                            
+                            <hr class="border-slate-700 my-6">
+                            
+                            <!-- Grand Total -->
+                            <p class="text-xl text-slate-400">Monthly Editing Total:</p>
+                            <div class="text-6xl font-extrabold text-white my-2" id="grand-total">
+                                0 AED
+                            </div>
+                            <p class="text-slate-500 mb-6">/ Month</p>
+                            
+                            <p class="text-sm text-slate-300 mb-6">
+                                Happy with this plan? Take a screenshot and send it to me, or book a call to get started!
+                            </T>
+                            
+                            <div class="flex flex-col gap-4">
+                                <a href="httpsS://wa.me/971562450103" target="_blank" class="w-full text-center bg-green-500 text-white px-6 py-3 rounded-lg font-bold text-lg hover:bg-green-400 transition-colors">
+                                    <i class="fab fa-whatsapp mr-2"></i> Send Plan on WhatsApp
+                                </a>
+                                <a href="httpsS://calendar.app.google/2RxDHToRhp6eh9tQ8" target="_blank" class="w-full text-center bg-blue-600 text-white px-6 py-3 rounded-lg font-bold text-lg hover:bg-blue-500 transition-colors">
+                                    <i class="fas fa-calendar-alt mr-2"></i> Book a Call
+                                </a>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- See My Work -->
+        <section id="work" class="py-24">
+            <div class="container mx-auto max-w-3xl px-6 text-center">
+                <div class="service-card rounded-2xl p-10 md:p-16 fade-in">
+                    <h2 class="text-4xl md:text-5xl font-extrabold text-white mb-6">See Some of My Work</h2>
+                    <p class="text-lg text-slate-300 max-w-xl mx-auto mb-8">
+                        This is a playlist of my public work. For more examples, please contact me directly.
+                        <br><strong class="text-slate-100">Please be respectful and do not share this content without my permission.</strong>
+                    </p>
+                    <a href="https://www.youtube.com/playlist?list=PLEfWFQr7quQ37TER5BvT29PL52mimAV6r" target="_blank" class="bg-red-600 text-white px-10 py-4 rounded-lg font-bold text-lg shadow-xl shadow-red-500/20 hover:bg-red-500 transition-colors">
+                        <i class="fab fa-youtube mr-2"></i> View YouTube Playlist
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- All Services -->
+        <section id="services" class="py-24 bg-slate-900/70">
+            <div class="container mx-auto max-w-7xl px-6">
+                <div class="text-center mb-16 max-w-3xl mx-auto">
+                    <h2 class="text-4xl md:text-5xl font-extrabold mb-4 fade-in">One-Stop Creative Studio</h2>
+                    <p class="text-lg text-slate-300 fade-in delay-100">
+                        Beyond social media, I offer a full range of high-end production services.
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Video Production -->
+                    <div class="service-card rounded-xl p-8 fade-in delay-100">
+                        <div class="p-4 bg-blue-500/10 rounded-lg inline-block mb-4 border border-blue-500/30">
+                            <i class="fas fa-camera-retro w-8 h-8 text-blue-400 text-3xl"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold mb-3 text-white">Video Production</h3>
+                        <p class="text-slate-300">Full-service video, from shooting to final cut. Perfect for events, vlogs, and promotions.</p>
+                    </div>
+                    
+                    <!-- Social Media -->
+                    <div class="service-card rounded-xl p-8 fade-in delay-200">
+                        <div class="p-4 bg-purple-500/10 rounded-lg inline-block mb-4 border border-purple-500/30">
+                            <i class="fas fa-video w-8 h-8 text-purple-400 text-3xl"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold mb-3 text-white">Social Media Content</h3>
+                        <p class="text-slate-300">Engaging edits for Reels, TikTok, & YouTube. Monthly packages available.</p>
+                    </div>
+
+                    <!-- Animation & VFX -->
+                    <div class="service-card rounded-xl p-8 fade-in delay-300">
+                        <div class="p-4 bg-pink-500/10 rounded-lg inline-block mb-4 border border-pink-500/30">
+                            <i class="fas fa-magic w-8 h-8 text-pink-400 text-3xl"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold mb-3 text-white">Animation & VFX</h3>
+                        <p class="text-slate-300">CGI, 2D/3D explainers, motion graphics, and live-action compositing.</p>
+                    </div>
+
+                    <!-- Design & Visualization -->
+                    <div class="service-card rounded-xl p-8 fade-in delay-400">
+                        <div class="p-4 bg-teal-500/10 rounded-lg inline-block mb-4 border border-teal-500/30">
+                            <i class="fas fa-palette w-8 h-8 text-teal-400 text-3xl"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold mb-3 text-white">Design & Visualization</h3>
+                        <p class="text-slate-300">Interior design, 3D renders, architectural walkthroughs, and graphic design.</p>
+                    </div>
+
+                    <!-- AI & Creative Tech -->
+                    <div class="service-card rounded-xl p-8 fade-in delay-500">
+                        <div class="p-4 bg-yellow-500/10 rounded-lg inline-block mb-4 border border-yellow-500/30">
+                            <i class="fas fa-robot w-8 h-8 text-yellow-400 text-3xl"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold mb-3 text-white">AI & Creative Tech</h3>
+                        <p class="text-slate-300">Using cutting-edge AI tools to enhance video, create visuals, and optimize workflow.</p>
+                    </div>
+
+                    <!-- Custom Quote (CHANGED) -->
+                    <div class="service-card rounded-xl p-8 fade-in delay-500 bg-slate-700/80 border-dashed border-slate-500">
+                         <div class="p-4 bg-green-500/10 rounded-lg inline-block mb-4 border border-green-500/30">
+                            <i class="fas fa-file-invoice w-8 h-8 text-green-400 text-3xl"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold mb-3 text-white">Have a Different Project?</h3>
+                        <p class="text-slate-300 mb-4">Need event coverage, 3D, or something not on the list? If you have an idea, let's talk.</p>
+                        <a href="httpsS://calendar.app.google/2RxDHToRhp6eh9tQ8" target="_blank" class="text-green-400 font-semibold text-lg hover:text-green-300 transition-colors">
+                            Let's Have a Meeting &rarr;
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Final CTA -->
+        <section id="contact" class="py-24 bg-gradient-to-r from-blue-600 to-purple-600">
+            <div class="container mx-auto max-w-4xl px-6 text-center">
+                <h2 class="text-4xl md:text-5xl font-extrabold text-white mb-6 fade-in">
+                    Ready to bring your vision to life?
+                </h2>
+                <p class="text-lg md:text-xl text-blue-100 max-w-2xl mx-auto mb-10 fade-in delay-100">
+                    Whether you need a custom plan or a full-scale production, I'm here to help.
+                    Let's chat about your ideas, goals, and budget.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-6 justify-center">
+                    
+                    <!-- Book Call -->
+                    <a href="httpsS://calendar.app.google/2RxDHToRhp6eh9tQ8" target="_blank" class="bg-white text-blue-700 px-8 py-3 rounded-lg font-bold text-lg shadow-2xl hover:scale-105 transition-transform transform fade-in delay-200">
+                        <i class="fas fa-calendar-alt mr-2"></i>
+                        Book Your FREE Call
+                    </a>
+                    
+                    <!-- WhatsApp -->
+                    <a href="httpsS://wa.me/971562450103" target="_blank" class="bg-green-500 text-white px-8 py-3 rounded-lg font-bold text-lg shadow-2xl hover:scale-105 transition-transform transform fade-in delay-300">
+                        <i class="fab fa-whatsapp mr-2"></i>
+                        WhatsApp Me
+                    </a>
+                </div>
+                <div class="mt-6 fade-in delay-400">
+                    <a href="mailto:Steve.nooshinfar@gmail.com" class="text-blue-100 text-lg hover:text-white transition-colors">
+                        <i class="fas fa-envelope mr-2"></i> Steve.nooshinfar@gmail.com
+                    </a>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="py-12 bg-slate-900">
+        <div class="container mx-auto max-w-7xl px-6 text-center text-slate-400">
+            <p>&copy; <script>document.write(new Date().getFullYear())</script> Steve Nooshinfar. All Rights Reserved.</p>
+            <p class="text-sm mt-2">Dubai-based Creative Visual Producer</p>
+        </div>
+    </footer>
+    
+    <!-- JavaScript for Calculator -->
+    <script>
+        // Get all the interactive elements
+        const reelsSlider = document.getElementById('reels-slider');
+        const reelsCount = document.getElementById('reels-count');
+        const reelsPricePer = document.getElementById('reels-price-per');
+        const reelsTotalText = document.getElementById('reels-total');
+
+        const postsSlider = document.getElementById('posts-slider');
+        const postsCount = document.getElementById('posts-count');
+        const postsPricePer = document.getElementById('posts-price-per');
+        const postsTotalText = document.getElementById('posts-total');
+
+        const storiesSlider = document.getElementById('stories-slider');
+        const storiesCount = document.getElementById('stories-count');
+        const storyPackage = document.getElementById('story-package');
+        const storiesTotalText = document.getElementById('stories-total');
+
+        // New Videography Elements
+        const videoIphoneCheck = document.getElementById('video-iphone-check');
+        const videoCameraCheck = document.getElementById('video-camera-check');
+        const videoMicCheck = document.getElementById('video-mic-check');
+        
+        const videoSummary = document.getElementById('video-summary');
+        const videoIphoneNote = document.getElementById('video-iphone-note');
+        const videoCameraNote = document.getElementById('video-camera-note');
+        const videoMicNote = document.getElementById('video-mic-note');
+
+        const grandTotalText = document.getElementById('grand-total');
+
+        // --- Pricing Logic Functions ---
+
+        function getReelPrice(count) {
+            if (count === 0) return 0;
+            if (count <= 3) return 200;
+            if (count <= 7) return 180;
+            if (count <= 11) return 160;
+            return 150; // 12 or more
+        }
+
+        function getPostPrice(count) {
+            if (count === 0) return 0;
+            if (count <= 3) return 100;
+            if (count <= 7) return 90;
+            if (count <= 11) return 80;
+            return 75; // 12 or more
+        }
+
+        // --- Main Calculation Function ---
+        function updateQuote() {
+            let total = 0; // This will ONLY be for editing
+
+            // 1. Calculate Reels
+            const reelsCountVal = parseInt(reelsSlider.value);
+            const reelPrice = getReelPrice(reelsCountVal);
+            const reelsTotal = reelsCountVal * reelPrice;
+            total += reelsTotal;
+
+            reelsCount.textContent = reelsCountVal;
+            reelsPricePer.textContent = (reelsCountVal > 0) ? `@ ${reelPrice} AED each` : "Slide to add reels";
+            reelsTotalText.textContent = `${reelsTotal} AED`;
+
+            // 2. Calculate Posts
+            const postsCountVal = parseInt(postsSlider.value);
+            const postPrice = getPostPrice(postsCountVal);
+            const postsTotal = postsCountVal * postPrice;
+            total += postsTotal;
+
+            postsCount.textContent = postsCountVal;
+            postsPricePer.textContent = (postsCountVal > 0) ? `@ ${postPrice} AED each` : "Slide to add posts";
+            postsTotalText.textContent = `${postsTotal} AED`;
+
+            // 3. Calculate Stories
+            let storiesTotal = 0;
+            if (storyPackage.checked) {
+                storiesSlider.disabled = true;
+                storiesSlider.value = 0;
+                storiesCount.textContent = "0";
+                storiesTotal = 250;
+                storiesTotalText.textContent = "250 AED (Package)";
+            } else {
+                storiesSlider.disabled = false;
+                const storiesCountVal = parseInt(storiesSlider.value);
+                storiesTotal = storiesCountVal * 15;
+                storiesCount.textContent = storiesCountVal;
+                storiesTotalText.textContent = `${storiesTotal} AED`;
+            }
+            total += storiesTotal;
+            
+            // 4. Check for Videographer
+            const videoIphoneVal = videoIphoneCheck.checked;
+            const videoCameraVal = videoCameraCheck.checked;
+            const videoMicVal = videoMicCheck.checked;
+
+            if (videoIphoneVal || videoCameraVal || videoMicVal) {
+                // If any video option is checked, show the summary box
+                videoSummary.classList.remove('hidden');
+                
+                // Toggle each line item based on its checkbox
+                videoIphoneVal ? videoIphoneNote.classList.remove('hidden') : videoIphoneNote.classList.add('hidden');
+                videoCameraVal ? videoCameraNote.classList.remove('hidden') : videoCameraNote.classList.add('hidden');
+                videoMicVal ? videoMicNote.classList.remove('hidden') : videoMicNote.classList.add('hidden');
+                
+            } else {
+                // If no video options are checked, hide the whole summary box
+                videoSummary.classList.add('hidden');
+            }
+
+            // 5. Update Grand Total (This is now just the EDITING total)
+            grandTotalText.textContent = `${total} AED`;
+        }
+
+        // --- Event Listeners ---
+        reelsSlider.addEventListener('input', updateQuote);
+        postsSlider.addEventListener('input', updateQuote);
+        storiesSlider.addEventListener('input', updateQuote);
+        storyPackage.addEventListener('change', updateQuote);
+        
+        // New Listeners
+        videoIphoneCheck.addEventListener('change', updateQuote);
+        videoCameraCheck.addEventListener('change', updateQuote);
+        videoMicCheck.addEventListener('change', updateQuote);
+
+        // Run the function once on page load to initialize
+        document.addEventListener('DOMContentLoaded', updateQuote);
+
+    </script>
+
+</body>
+</html>
