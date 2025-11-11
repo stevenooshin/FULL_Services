@@ -57,7 +57,6 @@
             backdrop-filter: blur(12px);
             border: 2px solid #38bdf8;
             box-shadow: 0 10px 40px -10px rgba(56, 189, 248, 0.3);
-            /* This makes the card "stick" to the top as you scroll */
             position: sticky;
             top: 100px; 
         }
@@ -73,7 +72,6 @@
             transition: opacity .2s;
         }
         
-        /* Slider thumb */
         input[type="range"]::-webkit-slider-thumb {
             -webkit-appearance: none;
             appearance: none;
@@ -94,22 +92,25 @@
             border: 4px solid #0f172a;
         }
         
-        /* Checkbox style */
-        input[type="checkbox"] {
+        /* Checkbox/Radio style */
+        input[type="checkbox"], input[type="radio"] {
             width: 20px;
             height: 20px;
             accent-color: #38bdf8;
         }
         
         /* Disabled slider style */
-        input[type="range"]:disabled {
+        input[type="range"]:disabled { opacity: 0.5; }
+        input[type="range"]:disabled::-webkit-slider-thumb { background: #64748b; }
+        input[type="range"]:disabled::-moz-range-thumb { background: #64748b; }
+
+        /* Disabled checkbox/radio style */
+        input[type="checkbox"]:disabled, input[type="radio"]:disabled {
             opacity: 0.5;
         }
-         input[type="range"]:disabled::-webkit-slider-thumb {
-            background: #64748b; /* slate-500 */
-        }
-         input[type="range"]:disabled::-moz-range-thumb {
-            background: #64748b;
+        input[type="checkbox"]:disabled + label,
+        input[type="radio"]:disabled + label {
+            opacity: 0.5;
         }
 
 
@@ -174,7 +175,7 @@
             </div>
         </section>
 
-        <!-- About Me Section (NEW) -->
+        <!-- About Me Section -->
         <section id="about" class="py-24">
             <div class="container mx-auto max-w-4xl px-6 text-center">
                 <div class="service-card rounded-2xl p-10 md:p-16 fade-in">
@@ -193,10 +194,9 @@
         <section id="builder" class="py-24 bg-slate-900/70">
             <div class="container mx-auto max-w-7xl px-6">
                 <div class="text-center mb-16 max-w-3xl mx-auto">
-                    <h2 class="text-4xl md:text-5xl font-extrabold mb-4 fade-in">Build Your Custom Monthly Plan</h2>
+                    <h2 class="text-4xl md:text-5xl font-extrabold mb-4 fade-in">Build Your Custom Plan</h2>
                     <p class="text-lg text-slate-300 fade-in delay-100">
-                        Use the sliders to create your perfect package. The more you add, the more you save!
-                        <br><span class="text-sm text-slate-400">(Prices are for editing-only, based on you providing the raw video files.)</span>
+                        Use the sliders and options to create your perfect package.
                     </p>
                 </div>
 
@@ -205,10 +205,12 @@
                     <!-- Left Column: Sliders -->
                     <div class="lg:col-span-2 space-y-8">
                         
-                        <!-- Reels Calculator -->
+                        <!-- Editing: Reels Calculator -->
                         <div class="plan-builder-card rounded-xl p-8 fade-in delay-100">
+                            <h3 class="text-2xl font-bold text-white mb-1">Monthly Editing: Reels</h3>
+                            <p class="text-sm text-slate-400 mb-4">Editing based on footage you provide.</p>
                             <div class="flex justify-between items-center mb-4">
-                                <label for="reels-slider" class="text-2xl font-bold text-white">Reels / TikToks</label>
+                                <label for="reels-slider" class="text-lg font-semibold text-white">Reels / TikToks</label>
                                 <div class="text-right">
                                     <span id="reels-count" class="text-3xl font-bold text-gradient">0</span>
                                     <span class="text-sm text-slate-400">per month</span>
@@ -220,10 +222,12 @@
                             </div>
                         </div>
 
-                        <!-- Posts Calculator -->
+                        <!-- Editing: Posts Calculator -->
                         <div class="plan-builder-card rounded-xl p-8 fade-in delay-200">
+                            <h3 class="text-2xl font-bold text-white mb-1">Monthly Editing: Posts</h3>
+                            <p class="text-sm text-slate-400 mb-4">Static, Carousel, or Graphic Design Posts.</p>
                             <div class="flex justify-between items-center mb-4">
-                                <label for="posts-slider" class="text-2xl font-bold text-white">Static / Carousel Posts</label>
+                                <label for="posts-slider" class="text-lg font-semibold text-white">Posts</label>
                                 <div class="text-right">
                                     <span id="posts-count" class="text-3xl font-bold text-gradient">0</span>
                                     <span class="text-sm text-slate-400">per month</span>
@@ -235,11 +239,10 @@
                             </div>
                         </div>
 
-                        <!-- Stories Calculator -->
+                        <!-- Editing: Stories Calculator -->
                         <div class="plan-builder-card rounded-xl p-8 fade-in delay-300">
-                            <label class="text-2xl font-bold text-white mb-4 block">Stories</label>
+                            <h3 class="text-2xl font-bold text-white mb-4">Monthly Editing: Stories</h3>
                             
-                            <!-- Story Package Checkbox -->
                             <div class="flex items-center gap-4 p-4 bg-slate-700/50 rounded-lg border border-slate-600">
                                 <input type="checkbox" id="story-package" class="flex-shrink-0">
                                 <label for="story-package" class="text-lg text-slate-100">
@@ -250,7 +253,6 @@
                             
                             <p class="text-center text-slate-400 my-4">OR</p>
 
-                            <!-- Individual Stories Slider -->
                             <div class="flex justify-between items-center mb-4">
                                 <label for="stories-slider" class="text-lg font-semibold text-white">Individual Stories</label>
                                 <div class="text-right">
@@ -261,31 +263,43 @@
                             <input type="range" id="stories-slider" min="0" max="19" value="0" step="1">
                         </div>
                         
-                        <!-- Videographer Options -->
+                        <!-- Videographer Options (NEW LOGIC) -->
                         <div class="plan-builder-card rounded-xl p-8 fade-in delay-400">
-                            <label class="text-2xl font-bold text-white mb-4 block">Add Filming Services?</label>
+                            <h3 class="text-2xl font-bold text-white mb-4">Add Filming Services (Per Day)</h3>
                             <p class="text-sm text-slate-400 mb-6">
-                                Need on-site filming? Select your needs. We'll discuss the final price, as this depends on location, lights, and time.
+                                Need someone to shoot? Select an option. The price is for one day and will be added to the total.
                             </p>
                             <div class="space-y-4">
+                                <!-- No Filming -->
                                 <div class="flex items-center gap-4 p-4 bg-slate-700/50 rounded-lg border border-slate-600">
-                                    <input type="checkbox" id="video-iphone-check" class="flex-shrink-0">
-                                    <label for="video-iphone-check" class="text-lg text-slate-100">
-                                        iPhone Videography
-                                        <span class="block text-sm text-blue-300 font-semibold">Approx. 500 AED / 5 Hours</span>
+                                    <input type="radio" id="video-none-check" name="video-type" class="flex-shrink-0" value="0" checked>
+                                    <label for="video-none-check" class="text-lg text-slate-100">
+                                        No Filming Needed
+                                        <span class="block text-sm text-slate-300 font-semibold">I have my own footage.</span>
                                     </label>
                                 </div>
+                                <!-- iPhone -->
                                 <div class="flex items-center gap-4 p-4 bg-slate-700/50 rounded-lg border border-slate-600">
-                                    <input type="checkbox" id="video-camera-check" class="flex-shrink-0">
+                                    <input type="radio" id="video-iphone-check" name="video-type" class="flex-shrink-0" value="500">
+                                    <label for="video-iphone-check" class="text-lg text-slate-100">
+                                        iPhone Videography
+                                        <span class="block text-sm text-blue-300 font-semibold">500 AED / 5 Hours</span>
+                                    </label>
+                                </div>
+                                <!-- Pro Camera -->
+                                <div class="flex items-center gap-4 p-4 bg-slate-700/50 rounded-lg border border-slate-600">
+                                    <input type="radio" id="video-camera-check" name="video-type" class="flex-shrink-0" value="850">
                                     <label for="video-camera-check" class="text-lg text-slate-100">
                                         Pro Camera Videography
                                         <span class="block text-sm text-blue-300 font-semibold">Starts at 850 AED / Day</span>
                                     </label>
                                 </div>
+                                <!-- Mic Kit -->
+                                <hr class="border-slate-700">
                                 <div class="flex items-center gap-4 p-4 bg-slate-700/50 rounded-lg border border-slate-600">
-                                    <input type="checkbox" id="video-mic-check" class="flex-shrink-0">
+                                    <input type="checkbox" id="video-mic-check" class="flex-shrink-0" value="150" disabled>
                                     <label for="video-mic-check" class="text-lg text-slate-100">
-                                        Interview Mic Kit
+                                        Add Interview Mic Kit
                                         <span class="block text-sm text-blue-300 font-semibold">Adds 150 AED / Day</span>
                                     </label>
                                 </div>
@@ -294,7 +308,7 @@
 
                     </div>
                     
-                    <!-- Right Column: Quote Summary -->
+                    <!-- Right Column: Quote Summary (NEW LOGIC) -->
                     <div class="lg:col-span-1">
                         <div class="quote-card rounded-2xl p-6 lg:p-8 text-center">
                             <h3 class="text-3xl font-extrabold text-white mb-6">Your Custom Quote</h3>
@@ -302,54 +316,50 @@
                             <!-- Editing Totals -->
                             <div class="space-y-4 text-lg text-slate-300 text-left mb-6">
                                 <div class="flex justify-between items-center">
-                                    <span>Reels Total:</span>
+                                    <span>Reels:</span>
                                     <span id="reels-total" class="font-bold text-white">0 AED</span>
                                 </div>
                                 <div class="flex justify-between items-center">
-                                    <span>Posts Total:</span>
+                                    <span>Posts:</span>
                                     <span id="posts-total" class="font-bold text-white">0 AED</span>
                                 </div>
                                 <div class="flex justify-between items-center">
-                                    <span>Stories Total:</span>
+                                    <span>Stories:</span>
                                     <span id="stories-total" class="font-bold text-white">0 AED</span>
-                                </div>
-                            </div>
-
-                            <!-- Videography Summary -->
-                            <div id="video-summary" class="hidden space-y-3 text-left mb-6">
-                                <p class="text-lg text-yellow-400 font-semibold">Filming Services (to discuss):</p>
-                                <div id="video-iphone-note" class="hidden flex items-center gap-2 text-slate-300">
-                                    <i class="fas fa-check-circle text-green-500"></i>
-                                    <span>iPhone Videography</span>
-                                </div>
-                                <div id="video-camera-note" class="hidden flex items-center gap-2 text-slate-300">
-                                    <i class="fas fa-check-circle text-green-500"></i>
-                                    <span>Pro Camera Videography</span>
-                                </div>
-                                <div id="video-mic-note" class="hidden flex items-center gap-2 text-slate-300">
-                                    <i class="fas fa-check-circle text-green-500"></i>
-                                    <span>Interview Mic Kit</span>
                                 </div>
                             </div>
                             
                             <hr class="border-slate-700 my-6">
+
+                             <div class="space-y-4 text-lg text-slate-300 text-left mb-6">
+                                <div class="flex justify-between items-center">
+                                    <span class="text-xl text-blue-300">Monthly Editing Total:</span>
+                                    <span id="editing-total-summary" class="font-bold text-white text-xl">0 AED</span>
+                                </div>
+                                <div class="flex justify-between items-center">
+                                    <span class="text-xl text-blue-300">Filming (1 Day):</span>
+                                    <span id="filming-total-summary" class="font-bold text-white text-xl">0 AED</span>
+                                </div>
+                            </div>
+
+                            <hr class="border-slate-700 my-6">
                             
                             <!-- Grand Total -->
-                            <p class="text-xl text-slate-400">Monthly Editing Total:</p>
+                            <p class="text-xl text-slate-400">Estimated Total:</p>
                             <div class="text-6xl font-extrabold text-white my-2" id="grand-total">
                                 0 AED
                             </div>
-                            <p class="text-slate-500 mb-6">/ Month</p>
+                            <p class="text-slate-500 mb-2" id="total-note">/ Month + 1 Day Filming</p>
                             
                             <p class="text-sm text-slate-300 mb-6">
-                                Happy with this plan? Take a screenshot and send it to me, or book a call to get started!
-                            </T>
+                                *This is an estimate. Price is for monthly editing + one day of filming. We'll confirm the total days needed on our call.
+                            </p>
                             
                             <div class="flex flex-col gap-4">
-                                <a href="httpsS://wa.me/971562450103" target="_blank" class="w-full text-center bg-green-500 text-white px-6 py-3 rounded-lg font-bold text-lg hover:bg-green-400 transition-colors">
+                                <a href="https://wa.me/971562450103" target="_blank" class="w-full text-center bg-green-500 text-white px-6 py-3 rounded-lg font-bold text-lg hover:bg-green-400 transition-colors">
                                     <i class="fab fa-whatsapp mr-2"></i> Send Plan on WhatsApp
                                 </a>
-                                <a href="httpsS://calendar.app.google/2RxDHToRhp6eh9tQ8" target="_blank" class="w-full text-center bg-blue-600 text-white px-6 py-3 rounded-lg font-bold text-lg hover:bg-blue-500 transition-colors">
+                                <a href="https://calendar.app.google/2RxDHToRhp6eh9tQ8" target="_blank" class="w-full text-center bg-blue-600 text-white px-6 py-3 rounded-lg font-bold text-lg hover:bg-blue-500 transition-colors">
                                     <i class="fas fa-calendar-alt mr-2"></i> Book a Call
                                 </a>
                             </div>
@@ -387,7 +397,6 @@
                 </div>
 
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    <!-- Video Production -->
                     <div class="service-card rounded-xl p-8 fade-in delay-100">
                         <div class="p-4 bg-blue-500/10 rounded-lg inline-block mb-4 border border-blue-500/30">
                             <i class="fas fa-camera-retro w-8 h-8 text-blue-400 text-3xl"></i>
@@ -395,8 +404,6 @@
                         <h3 class="text-2xl font-bold mb-3 text-white">Video Production</h3>
                         <p class="text-slate-300">Full-service video, from shooting to final cut. Perfect for events, vlogs, and promotions.</p>
                     </div>
-                    
-                    <!-- Social Media -->
                     <div class="service-card rounded-xl p-8 fade-in delay-200">
                         <div class="p-4 bg-purple-500/10 rounded-lg inline-block mb-4 border border-purple-500/30">
                             <i class="fas fa-video w-8 h-8 text-purple-400 text-3xl"></i>
@@ -404,8 +411,6 @@
                         <h3 class="text-2xl font-bold mb-3 text-white">Social Media Content</h3>
                         <p class="text-slate-300">Engaging edits for Reels, TikTok, & YouTube. Monthly packages available.</p>
                     </div>
-
-                    <!-- Animation & VFX -->
                     <div class="service-card rounded-xl p-8 fade-in delay-300">
                         <div class="p-4 bg-pink-500/10 rounded-lg inline-block mb-4 border border-pink-500/30">
                             <i class="fas fa-magic w-8 h-8 text-pink-400 text-3xl"></i>
@@ -413,8 +418,6 @@
                         <h3 class="text-2xl font-bold mb-3 text-white">Animation & VFX</h3>
                         <p class="text-slate-300">CGI, 2D/3D explainers, motion graphics, and live-action compositing.</p>
                     </div>
-
-                    <!-- Design & Visualization -->
                     <div class="service-card rounded-xl p-8 fade-in delay-400">
                         <div class="p-4 bg-teal-500/10 rounded-lg inline-block mb-4 border border-teal-500/30">
                             <i class="fas fa-palette w-8 h-8 text-teal-400 text-3xl"></i>
@@ -422,8 +425,6 @@
                         <h3 class="text-2xl font-bold mb-3 text-white">Design & Visualization</h3>
                         <p class="text-slate-300">Interior design, 3D renders, architectural walkthroughs, and graphic design.</p>
                     </div>
-
-                    <!-- AI & Creative Tech -->
                     <div class="service-card rounded-xl p-8 fade-in delay-500">
                         <div class="p-4 bg-yellow-500/10 rounded-lg inline-block mb-4 border border-yellow-500/30">
                             <i class="fas fa-robot w-8 h-8 text-yellow-400 text-3xl"></i>
@@ -431,15 +432,13 @@
                         <h3 class="text-2xl font-bold mb-3 text-white">AI & Creative Tech</h3>
                         <p class="text-slate-300">Using cutting-edge AI tools to enhance video, create visuals, and optimize workflow.</p>
                     </div>
-
-                    <!-- Custom Quote (CHANGED) -->
                     <div class="service-card rounded-xl p-8 fade-in delay-500 bg-slate-700/80 border-dashed border-slate-500">
                          <div class="p-4 bg-green-500/10 rounded-lg inline-block mb-4 border border-green-500/30">
                             <i class="fas fa-file-invoice w-8 h-8 text-green-400 text-3xl"></i>
                         </div>
                         <h3 class="text-2xl font-bold mb-3 text-white">Have a Different Project?</h3>
                         <p class="text-slate-300 mb-4">Need event coverage, 3D, or something not on the list? If you have an idea, let's talk.</p>
-                        <a href="httpsS://calendar.app.google/2RxDHToRhp6eh9tQ8" target="_blank" class="text-green-400 font-semibold text-lg hover:text-green-300 transition-colors">
+                        <a href="https://calendar.app.google/2RxDHToRhp6eh9tQ8" target="_blank" class="text-green-400 font-semibold text-lg hover:text-green-300 transition-colors">
                             Let's Have a Meeting &rarr;
                         </a>
                     </div>
@@ -459,22 +458,27 @@
                 </p>
                 <div class="flex flex-col sm:flex-row gap-6 justify-center">
                     
-                    <!-- Book Call -->
-                    <a href="httpsS://calendar.app.google/2RxDHToRhp6eh9tQ8" target="_blank" class="bg-white text-blue-700 px-8 py-3 rounded-lg font-bold text-lg shadow-2xl hover:scale-105 transition-transform transform fade-in delay-200">
+                    <a href="https://calendar.app.google/2RxDHToRhp6eh9tQ8" target="_blank" class="bg-white text-blue-700 px-8 py-3 rounded-lg font-bold text-lg shadow-2xl hover:scale-105 transition-transform transform fade-in delay-200">
                         <i class="fas fa-calendar-alt mr-2"></i>
                         Book Your FREE Call
                     </a>
                     
-                    <!-- WhatsApp -->
-                    <a href="httpsS://wa.me/971562450103" target="_blank" class="bg-green-500 text-white px-8 py-3 rounded-lg font-bold text-lg shadow-2xl hover:scale-105 transition-transform transform fade-in delay-300">
+                    <a href="https://wa.me/971562450103" target="_blank" class="bg-green-500 text-white px-8 py-3 rounded-lg font-bold text-lg shadow-2xl hover:scale-105 transition-transform transform fade-in delay-300">
                         <i class="fab fa-whatsapp mr-2"></i>
                         WhatsApp Me
                     </a>
                 </div>
-                <div class="mt-6 fade-in delay-400">
-                    <a href="mailto:Steve.nooshinfar@gmail.com" class="text-blue-100 text-lg hover:text-white transition-colors">
-                        <i class="fas fa-envelope mr-2"></i> Steve.nooshinfar@gmail.com
-                    </a>
+                <div class="mt-8 fade-in delay-400 space-y-2 text-blue-100 text-lg">
+                    <p>
+                        <a href="mailto:Steve.nooshinfar@gmail.com" class="hover:text-white transition-colors">
+                            <i class="fas fa-envelope mr-2"></i> Steve.nooshinfar@gmail.com
+                        </a>
+                    </p>
+                    <p>
+                        <a href="https://wa.me/971562450103" target="_blank" class="hover:text-white transition-colors">
+                            <i class="fab fa-whatsapp mr-2"></i> +971 56 245 0103
+                        </a>
+                    </p>
                 </div>
             </div>
         </section>
@@ -489,7 +493,7 @@
         </div>
     </footer>
     
-    <!-- JavaScript for Calculator -->
+    <!-- JavaScript for Calculator (NEW LOGIC) -->
     <script>
         // Get all the interactive elements
         const reelsSlider = document.getElementById('reels-slider');
@@ -508,16 +512,17 @@
         const storiesTotalText = document.getElementById('stories-total');
 
         // New Videography Elements
+        const videoNoneCheck = document.getElementById('video-none-check');
         const videoIphoneCheck = document.getElementById('video-iphone-check');
         const videoCameraCheck = document.getElementById('video-camera-check');
         const videoMicCheck = document.getElementById('video-mic-check');
+        const videoTypeRadios = document.querySelectorAll('input[name="video-type"]');
         
-        const videoSummary = document.getElementById('video-summary');
-        const videoIphoneNote = document.getElementById('video-iphone-note');
-        const videoCameraNote = document.getElementById('video-camera-note');
-        const videoMicNote = document.getElementById('video-mic-note');
-
+        // Quote Card Elements
+        const editingTotalSummary = document.getElementById('editing-total-summary');
+        const filmingTotalSummary = document.getElementById('filming-total-summary');
         const grandTotalText = document.getElementById('grand-total');
+        const totalNote = document.getElementById('total-note');
 
         // --- Pricing Logic Functions ---
 
@@ -539,29 +544,29 @@
 
         // --- Main Calculation Function ---
         function updateQuote() {
-            let total = 0; // This will ONLY be for editing
+            
+            // --- 1. Calculate Editing Total ---
+            let editingTotal = 0;
 
-            // 1. Calculate Reels
+            // Reels
             const reelsCountVal = parseInt(reelsSlider.value);
             const reelPrice = getReelPrice(reelsCountVal);
             const reelsTotal = reelsCountVal * reelPrice;
-            total += reelsTotal;
-
+            editingTotal += reelsTotal;
             reelsCount.textContent = reelsCountVal;
             reelsPricePer.textContent = (reelsCountVal > 0) ? `@ ${reelPrice} AED each` : "Slide to add reels";
             reelsTotalText.textContent = `${reelsTotal} AED`;
 
-            // 2. Calculate Posts
+            // Posts
             const postsCountVal = parseInt(postsSlider.value);
             const postPrice = getPostPrice(postsCountVal);
             const postsTotal = postsCountVal * postPrice;
-            total += postsTotal;
-
+            editingTotal += postsTotal;
             postsCount.textContent = postsCountVal;
             postsPricePer.textContent = (postsCountVal > 0) ? `@ ${postPrice} AED each` : "Slide to add posts";
             postsTotalText.textContent = `${postsTotal} AED`;
 
-            // 3. Calculate Stories
+            // Stories
             let storiesTotal = 0;
             if (storyPackage.checked) {
                 storiesSlider.disabled = true;
@@ -576,29 +581,48 @@
                 storiesCount.textContent = storiesCountVal;
                 storiesTotalText.textContent = `${storiesTotal} AED`;
             }
-            total += storiesTotal;
+            editingTotal += storiesTotal;
             
-            // 4. Check for Videographer
-            const videoIphoneVal = videoIphoneCheck.checked;
-            const videoCameraVal = videoCameraCheck.checked;
-            const videoMicVal = videoMicCheck.checked;
+            // Update Editing Total in Summary
+            editingTotalSummary.textContent = `${editingTotal} AED`;
 
-            if (videoIphoneVal || videoCameraVal || videoMicVal) {
-                // If any video option is checked, show the summary box
-                videoSummary.classList.remove('hidden');
-                
-                // Toggle each line item based on its checkbox
-                videoIphoneVal ? videoIphoneNote.classList.remove('hidden') : videoIphoneNote.classList.add('hidden');
-                videoCameraVal ? videoCameraNote.classList.remove('hidden') : videoCameraNote.classList.add('hidden');
-                videoMicVal ? videoMicNote.classList.remove('hidden') : videoMicNote.classList.add('hidden');
-                
+            // --- 2. Calculate Filming Total ---
+            let filmingTotal = 0;
+            
+            // Check which radio button is selected
+            if (videoIphoneCheck.checked) {
+                filmingTotal = 500;
+                videoMicCheck.disabled = false; // Enable mic kit
+            } else if (videoCameraCheck.checked) {
+                filmingTotal = 850;
+                videoMicCheck.disabled = false; // Enable mic kit
             } else {
-                // If no video options are checked, hide the whole summary box
-                videoSummary.classList.add('hidden');
+                // "No Filming" is selected
+                filmingTotal = 0;
+                videoMicCheck.disabled = true; // Disable mic kit
+                videoMicCheck.checked = false; // Uncheck it
             }
 
-            // 5. Update Grand Total (This is now just the EDITING total)
-            grandTotalText.textContent = `${total} AED`;
+            // Add mic kit price if checked
+            if (videoMicCheck.checked) {
+                filmingTotal += 150;
+            }
+            
+            // Update Filming Total in Summary
+            filmingTotalSummary.textContent = `${filmingTotal} AED`;
+
+            // --- 3. Calculate Grand Total ---
+            const grandTotal = editingTotal + filmingTotal;
+            grandTotalText.textContent = `${grandTotal} AED`;
+
+            // 4. Update Total Note
+            if (filmingTotal > 0 && editingTotal > 0) {
+                totalNote.textContent = "/ Month + 1 Day Filming";
+            } else if (filmingTotal > 0 && editingTotal === 0) {
+                totalNote.textContent = "For 1 Day Filming";
+            } else {
+                totalNote.textContent = "/ Month";
+            }
         }
 
         // --- Event Listeners ---
@@ -607,9 +631,8 @@
         storiesSlider.addEventListener('input', updateQuote);
         storyPackage.addEventListener('change', updateQuote);
         
-        // New Listeners
-        videoIphoneCheck.addEventListener('change', updateQuote);
-        videoCameraCheck.addEventListener('change', updateQuote);
+        // New Listeners for video options
+        videoTypeRadios.forEach(radio => radio.addEventListener('change', updateQuote));
         videoMicCheck.addEventListener('change', updateQuote);
 
         // Run the function once on page load to initialize
